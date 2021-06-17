@@ -30,7 +30,7 @@ const liste = {
 /* GET users listing. */
 router.get('/', function (req, res)
 {
-    res.send(liste) 
+  return  res.send(liste) 
 });
 
 
@@ -89,6 +89,7 @@ router.post('/', function (req, res) {
         var state = "pending";
         var tableno = 0;
         var dbInstance = db.getDB();
+        var now = new Date().toLocaleTimeString();
 
 
 
@@ -96,8 +97,8 @@ router.post('/', function (req, res) {
 
         bestellung.map(({ name, preis }) => {
             rid = uniqid();
-            console.log(`INSERT INTO bestellung VALUES('${rid}','${bid}',${tableno},'${name}',${preis},'${state}')`)
-            dbInstance.run(`INSERT INTO bestellung VALUES('${rid}','${bid}',${tableno},'${name}',${preis},'${state}')`), (err) => {
+            console.log(`INSERT INTO bestellung VALUES('${rid}','${bid}',${tableno},'${name}',${preis},'${state}','${now}')`)
+            dbInstance.run(`INSERT INTO bestellung VALUES('${rid}','${bid}',${tableno},'${name}',${preis},'${state}','${now}')`), (err) => {
                 return console.log(err.message);
             }
         });
@@ -117,7 +118,7 @@ router.post('/', function (req, res) {
 
     }
 
-    res.send(legit);
+   return res.send(legit);
 
 
 

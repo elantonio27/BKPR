@@ -31,7 +31,7 @@ const liste = {
 router.get('/', function (req, res)//reaction on get-Method
 {
 
-    res.send(liste) //sending a map of drinks
+  return  res.send(liste) //sending a map of drinks
     
 });
 // POST 
@@ -96,6 +96,8 @@ router.post('/', function (req, res) {//react on postment
         var state = "pending";
         var tableno = 0;
         var dbInstance = db.getDB();
+        var now = new Date().toLocaleTimeString();
+       
       
 
 
@@ -104,8 +106,9 @@ router.post('/', function (req, res) {//react on postment
 
         bestellung.map(({ name, preis }) => {
             rid = uniqid();
-            console.log(`INSERT INTO bestellung VALUES('${rid}','${bid}',${tableno},'${name}',${preis},'${state}')`)
-            dbInstance.run(`INSERT INTO bestellung VALUES('${rid}','${bid}',${tableno},'${name}',${preis},'${state}')`), (err) => {
+
+            console.log(`INSERT INTO bestellung VALUES('${rid}','${bid}',${tableno},'${name}',${preis},'${state}','${now}')`)
+            dbInstance.run(`INSERT INTO bestellung VALUES('${rid}','${bid}',${tableno},'${name}',${preis},'${state}','${now}')`), (err) => {
                 return console.log(err.message);
             }
         });
@@ -125,7 +128,7 @@ router.post('/', function (req, res) {//react on postment
         
      }
     
-    res.send(legit);
+   return res.send(legit);
     
 
 

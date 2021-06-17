@@ -31,7 +31,7 @@ const liste = {
 /* GET users listing. */
 router.get('/', function (req, res)
 {
-    res.send(liste) //Sendet die Liste an die Website
+   return res.send(liste) //Sendet die Liste an die Website
 });
 
 
@@ -95,7 +95,7 @@ router.post('/', function (req, res) {//erhält die bestellung
         var state = "pending";
         var tableno = 0;
         var dbInstance = db.getDB();
-
+        var now = new Date().toLocaleTimeString();
 
 
         //wenn 2 Getränke eingefügt werden, dann nimmt er nur eins!
@@ -105,8 +105,9 @@ router.post('/', function (req, res) {//erhält die bestellung
 
         bestellung.map(({ name, preis }) => {
             rid = uniqid();
-            console.log(`INSERT INTO bestellung VALUES('${rid}','${bid}',${tableno},'${name}',${preis},'${state}')`)
-            dbInstance.run(`INSERT INTO bestellung VALUES('${rid}','${bid}',${tableno},'${name}',${preis},'${state}')`), (err) => {
+
+            console.log(`INSERT INTO bestellung VALUES('${rid}','${bid}',${tableno},'${name}',${preis},'${state}','${now}')`)
+            dbInstance.run(`INSERT INTO bestellung VALUES('${rid}','${bid}',${tableno},'${name}',${preis},'${state}','${now}')`), (err) => {
                 return console.log(err.message);
             }
         });
@@ -126,7 +127,7 @@ router.post('/', function (req, res) {//erhält die bestellung
 
     }
 
-    res.send(legit);
+    return res.send(legit);
 
 
 

@@ -30,9 +30,17 @@ const initTables = () => {
 
 
     this.db.serialize(() => {
-        this.db.prepare(`CREATE TABLE IF NOT EXISTS bestellung(rid BLOB PRIMARY KEY,bid BLOB,tableno INT,drink TEXT,price REAL,validation TEXT)`)
+        this.db.prepare(`CREATE TABLE IF NOT EXISTS bestellung(rid BLOB PRIMARY KEY,bid BLOB,tableno INT,drink TEXT,price REAL,validation TEXT, timestamp DATE DEFAULT (datetime('now','localtime')))`)
             .run().finalize();
     });
+
+    /*
+     * 
+     * CREATE TABLE whatever(
+     ....
+     timestamp DATE DEFAULT (datetime('now','localtime')),
+     ...
+);
      //this works:
     /*
     var bidJSON = getBID();
